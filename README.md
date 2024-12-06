@@ -64,3 +64,91 @@
             padding: 10px;
             margin-top: 10px;
             width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <div id="passwordScreen">
+        <div>
+            <h2>أدخل كلمة المرور</h2>
+            <input type="password" id="passwordInput" placeholder="كلمة المرور">
+            <button onclick="checkPassword()">دخول</button>
+        </div>
+    </div>
+
+    <header>
+        <h1>نظام إدارة الموظفين</h1>
+    </header>
+    <div class="container">
+        <h2>إضافة موظف جديد</h2>
+        <form id="employeeForm">
+            <label for="name">اسم الموظف:</label>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="job">الوظيفة:</label>
+            <input type="text" id="job" name="job" required><br><br>
+
+            <label for="hours">عدد الساعات:</label>
+            <input type="number" id="hours" name="hours" required><br><br>
+
+            <label for="absences">عدد الغيابات:</label>
+            <input type="number" id="absences" name="absences" required><br><br>
+
+            <button type="submit">إضافة الموظف</button>
+        </form>
+
+        <h2>قائمة الموظفين</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>اسم الموظف</th>
+                    <th>الوظيفة</th>
+                    <th>عدد الساعات</th>
+                    <th>عدد الغيابات</th>
+                </tr>
+            </thead>
+            <tbody id="employeeTable">
+                <!-- Employee rows will appear here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const employeeForm = document.getElementById('employeeForm');
+        const employeeTable = document.getElementById('employeeTable');
+
+        employeeForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const job = document.getElementById('job').value;
+            const hours = document.getElementById('hours').value;
+            const absences = document.getElementById('absences').value;
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${name}</td>
+                <td>${job}</td>
+                <td>${hours}</td>
+                <td>${absences}</td>
+            `;
+
+            employeeTable.appendChild(row);
+
+            employeeForm.reset();
+        });
+
+        function checkPassword() {
+            const passwordInput = document.getElementById('passwordInput');
+            const password = passwordInput.value;
+
+            if (password === '7111') {
+                document.body.style.display = 'block';
+                document.getElementById('passwordScreen').style.display = 'none';
+            } else {
+                alert('كلمة المرور غير صحيحة!');
+            }
+        }
+    </script>
+</body>
+</html>
